@@ -16,5 +16,5 @@ OBJ=$(patsubst %,$(ODIR)/%,$(_OBJ))
 $(ODIR)/%.o: %.c $(DEPS)
 	$(CC) -c -g -o $@ $< $(CFLAGS)
 
-mazemake: $(OBJ)
+mazemake.out: $(OBJ)
 	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
