@@ -51,7 +51,7 @@ int main(int argc, char** argv){
   //initialization of a pawn based on values returned by buildMaze() (entranceRow and exitRow)
 
   displayMaze(maze);
-  displayPawn(P1);
+  displayPawn(P2);
   refresh();
 
   getchar();
