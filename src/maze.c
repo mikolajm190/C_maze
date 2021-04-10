@@ -35,7 +35,7 @@ int main(int argc, char** argv){
 	curs_set(0);
 	timeout(0);
 
-  int maze[N][M][W] = {{{0, 0, 0, 0, 0}}};
+  int maze[N][M][W] = {{{0, 0, 0, 0}}};
   /*
        ___
       |__|    index - direction:  0 - down, 1 - left, 2 - up, 3 - right
@@ -51,13 +51,13 @@ int main(int argc, char** argv){
   //initialization of a pawn based on values returned by buildMaze() (entranceRow and exitRow)
 
   displayMaze(maze);
-  displayPawn(P2);
+  displayPawn(P1);
   refresh();
 
   getchar();
   endwin();
 
-  /* test
+  /*
   for(int i = 0; i < N; i++){
     for(int j = 0; j < M; j++){
       for(int k = 0; k < W; k++){

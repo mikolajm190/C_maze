@@ -45,7 +45,7 @@ void displayMaze(int maze[][M][W]){
 
 
           //random cell
-          for(int k = 0; k < W - 1; k++){
+          for(int k = 0; k < W; k++){
             if(k == 0 && maze[i][j][0]) //down
               mvprintw(disRow + 1, disCol, rowSign);
             else if (k == 1 && maze[i][j][1]) //left
@@ -57,6 +57,6 @@ void displayMaze(int maze[][M][W]){
             }
           }
         }
-        
+
   return;
 }

@@ -5,7 +5,7 @@
 #define N 10
 #define M 20
 //walls and visit digit
-#define W 5
+#define W 4
 
 //struct representing a player pawn
 typedef struct pawn {
