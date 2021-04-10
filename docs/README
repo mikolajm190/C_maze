@@ -1,0 +1,37 @@
+author: Mikołaj Mochocki
+university: UKSW
+subject: PPI
+project name: maze
+creation date: 22.03.2021
+
+//////              INFO                ///////
+
+This file consists of 3 sections:
+
+1. User's guide
+2. Project documentation
+    a. maze generation
+    b. pathfinding
+3. Bibliography
+
+
+//////       PROJECT DOCUMENTATION       ///////
+
+
+My goal was finding algorithm that generate perfect maze (only one way out) and is fairly simple. I took into account also speed and recommendation within materials that I listed in 3 section of this file. Based upon those factors I decided to bring 3 final candidates: randomized depth-first search, randomized Kruskal's algorithm and recursive division method. Out of this 3 I picked first as I found it easiest to implement and read some approving recomendations. At first I decided to try recursive version even after reading about its drawback (large depth of recursion).
+
+Randomized depth-first search: description(todo)
+Randomized Kruskal's: description(todo)
+Recursive division method: description(todo)
+
+At this time I realized that compiling so many files was starting to become tiring. I did some research and found helpful article about make command. After small adjustments I was able to compile with great ease.
+
+The result of buliding a maze was satisfying enough to proceed to second part of the project. My second goal was to implement algorithm for AI. After gaining some knowledge in this topic...(todo)
+
+Before proceeding to the second part I realized that keeping a integer for marking cells visited is unnecessary. Hence I decided to rebuild my mazeDeneration function instead of keeping this information in maze array I created an local array in this function.
+
+//////           BIBLIOGRAPHY            ///////
+
+https://en.wikipedia.org/wiki/Maze_generation_algorithm
+https://stackoverflow.com/questions/38502/whats-a-good-algorithm-to-generate-a-maze
+https://cs.colby.edu/maxwell/courses/tutorials/maketutor/
