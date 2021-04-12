@@ -100,7 +100,7 @@ void dfs(int maze[][M][W], int visited[][M], int cellRow, int cellCol){
 }
 }
 
-void buildMaze(int maze[][M][W]){
+void buildMaze(int maze[][M][W], Path *startEnd){
 
   /* array initialization */
   for (int i = 0; i < N; i++){
@@ -119,8 +119,10 @@ void buildMaze(int maze[][M][W]){
 
   //creating entrance and exit
   maze[entranceRow][0][1] = 0; maze[exitRow][M - 1][3] = 0;
+  startEnd->rowStart = entranceRow; startEnd->colStart = 0;
+  startEnd->rowEnd = exitRow; startEnd->colEnd = M - 1;
 
   /* depth first search algorithm */
   dfs(maze, visited, entranceRow, 0);
-
+  
 }

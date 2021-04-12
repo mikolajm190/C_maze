@@ -13,4 +13,9 @@ typedef struct pawn {
   char pawnChar;
 } Pawn;
 
+//struct for start and end cells coordinates
+typedef struct path {
+  int rowStart, colStart, rowEnd, colEnd;
+} Path;
+
 #endif

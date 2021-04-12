@@ -48,8 +48,9 @@ int main(int argc, char** argv){
   */
   Pawn P1; P1.row = 0; P1.column = 0; P1.pawnChar = '1';
   Pawn P2; P2.row = 0; P2.column = 0; P2.pawnChar = '2';
+  Path startEnd;
 
-  buildMaze(maze);
+  buildMaze(maze, &startEnd);
 
   //initialization of a pawn based on values returned by buildMaze() (entranceRow and exitRow)
   displayMaze(maze);
