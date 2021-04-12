@@ -7,6 +7,9 @@ topic: maze
 //test
 #include <stdio.h>
 
+/* delay */
+#include <unistd.h>
+
 /* maze generation functions */
 #include "mazeGeneration.h"
 
@@ -32,7 +35,7 @@ int main(int argc, char** argv){
 	raw();
 	keypad(stdscr, TRUE);
 	noecho();
-	curs_set(0);
+	curs_set(FALSE);
 	timeout(0);
 
   int maze[N][M][W] = {{{0, 0, 0, 0}}};
@@ -49,7 +52,6 @@ int main(int argc, char** argv){
   buildMaze(maze);
 
   //initialization of a pawn based on values returned by buildMaze() (entranceRow and exitRow)
-
   displayMaze(maze);
   displayPawn(P1);
   refresh();
