@@ -7,6 +7,8 @@ topic: maze
 //test
 #include <stdio.h>
 
+#include <string.h> //strcmp
+
 /* delay */
 #include <unistd.h>
 
@@ -27,6 +29,16 @@ topic: maze
 
 int main(int argc, char** argv){
 
+  //passed arguments check
+  if (argc != 2){
+    printf("Wrong number of arguments passed. 1 is needed.\n");
+    exit(EXIT_FAILURE);
+  }
+  else if (strcmp(argv[1], "player") != 0 && strcmp(argv[1], "ai") == 0 && strcmp(argv[1], "battle") == 0){
+    printf("Wrong argument given. Should be player/ai/battle.\n");
+    exit(EXIT_FAILURE);
+  }
+
   //initialization of random numbers generator
   srand(SEED);
 
@@ -46,19 +58,30 @@ int main(int argc, char** argv){
       every cell stores values that represent wall or its lack
       0 - no wall, 1 - wall
   */
-  Pawn P1; P1.row = 0; P1.column = 0; P1.pawnChar = '1';
-  Pawn P2; P2.row = 0; P2.column = 0; P2.pawnChar = '2';
-  Path startEnd;
 
-  buildMaze(maze, &startEnd);
+  //player mode
+  if (strcmp(argv[1], "player") == 0) {
+    Pawn P1; P1.row = 0; P1.column = 0; P1.pawnChar = '1';
+    Path startEnd;
 
-  //initialization of a pawn based on values returned by buildMaze() (entranceRow and exitRow)
-  displayMaze(maze);
-  displayPawn(P1);
-  refresh();
+    buildMaze(maze, &startEnd);
 
-  getchar();
-  endwin();
+    //initialization of a pawn based on values returned by buildMaze() (entranceRow and exitRow)
+    displayMaze(maze);
+    displayPawn(P1);
+    refresh();
+
+    getchar();
+    endwin();
+  }
+  //ai player mode
+  else if (strcmp(argv[1], "ai") == 0) {
+    Pawn P2; P2.row = 0; P2.column = 0; P2.pawnChar = '2';
+  }
+  //battle mode
+  else {
+
+  }
 
   /*
   for(int i = 0; i < N; i++){
@@ -72,5 +95,5 @@ int main(int argc, char** argv){
   }
   */
 
-  return 0;
+  return EXIT_SUCCESS;
 }
