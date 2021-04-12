@@ -28,7 +28,7 @@ At this time I realized that compiling so many files was starting to become tiri
 
 The result of buliding a maze was satisfying enough to proceed to second part of the project. My second goal was to implement algorithm for AI. After gaining some knowledge in this topic...(todo)
 
-Before proceeding to the second part I realized that keeping a integer for marking cells visited is unnecessary. Hence I decided to rebuild my mazeDeneration function instead of keeping this information in maze array I created an local array in this function.
+Before proceeding to the second part I realized that keeping a integer for marking cells visited is unnecessary. Hence I decided to rebuild my mazeGeneration function instead of keeping this information in maze array I created a local array in this function.
 
 //////           BIBLIOGRAPHY            ///////
 
