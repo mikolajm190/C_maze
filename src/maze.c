@@ -80,7 +80,7 @@ int main(int argc, char** argv){
   }
   //battle mode
   else {
-    //
+    //test
   }
 
   /*
