@@ -3,9 +3,6 @@
 
 #include "macros.h" //dimensions
 
-#include <ncurses.h> //api for the aplication
-#include <stdlib.h>
-
 //converts char to string
 void chtostr(char, char*);
 

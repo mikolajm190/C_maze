@@ -14,7 +14,4 @@ void dfs(int[][M][W], int[][M], int, int);
 //maze generator
 void buildMaze(int[][M][W], Path*);
 
-//winner check
-int isWinner(int[][M][W]);
-
 #endif

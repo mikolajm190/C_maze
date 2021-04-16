@@ -1,6 +1,9 @@
 #ifndef macros_h
 #define macros_h
 
+#include <stdlib.h> //abs, exit, srand, rand
+#include <ncurses.h> //api
+
 //dimensions
 #define N 10
 #define M 20

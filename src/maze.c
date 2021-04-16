@@ -4,9 +4,6 @@ UKSW, PPI
 topic: maze
 */
 
-//test
-#include <stdio.h>
-
 #include <string.h> //strcmp
 
 /* delay */
@@ -72,7 +69,7 @@ int main(int argc, char** argv){
     displayPawn(P1);
     refresh();
 
-    while (1) {
+    while (!isWinner(&startEnd, &P1)) {
       usleep((unsigned int) (50000));
       PMove(maze, &P1);
       displayMaze(maze);
@@ -90,18 +87,6 @@ int main(int argc, char** argv){
   else {
     //test
   }
-
-  /*
-  for(int i = 0; i < N; i++){
-    for(int j = 0; j < M; j++){
-      for(int k = 0; k < W; k++){
-        printf("%d", maze[i][j][k]);
-      }
-      printf("\t");
-    }
-    printf("\n");
-  }
-  */
 
   return EXIT_SUCCESS;
 }

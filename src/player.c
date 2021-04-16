@@ -38,3 +38,13 @@ void PMove(int maze[][M][W], Pawn *P){
   clear();
   return;
 }
+
+//check if player has reached an exit (if yes return 1, return 0 otherwise)
+int isWinner(Path *End, Pawn *P){
+  //compare coordinates
+  if (End->rowEnd == P->row && End->colEnd == P->column) {
+    return 1;
+  } else {
+    return 0;
+  }
+}

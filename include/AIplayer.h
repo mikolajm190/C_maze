@@ -2,7 +2,6 @@
 #define AIplayer_h
 
 #include "macros.h"
-#include <math.h> //abs
 
 //pathfinding algorithm
 void findShortestPath(int[][M][W]);
