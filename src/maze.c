@@ -59,19 +59,27 @@ int main(int argc, char** argv){
       0 - no wall, 1 - wall
   */
 
+  //build maze
+  Path startEnd;
+  buildMaze(maze, &startEnd);
+
   //player mode
   if (strcmp(argv[1], "player") == 0) {
     Pawn P1; P1.row = 0; P1.column = 0; P1.pawnChar = '1';
-    Path startEnd;
-
-    buildMaze(maze, &startEnd);
 
     //initialization of a pawn based on values returned by buildMaze() (entranceRow and exitRow)
     displayMaze(maze);
     displayPawn(P1);
     refresh();
 
-    getchar();
+    while (1) {
+      usleep((unsigned int) (50000));
+      PMove(maze, &P1);
+      displayMaze(maze);
+      displayPawn(P1);
+      refresh();
+    }
+
     endwin();
   }
   //ai player mode

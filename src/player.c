@@ -1,36 +1,37 @@
 #include "player.h"
 
 //check if a move is viable and move if true
-void PMove(int maze[][M][W], Pawn P){
+void PMove(int maze[][M][W], Pawn *P){
   //get user input
   int key = -1;
 	key = getch();
 	switch (key) {
 	case 'q': //quit
 		endwin();
+    exit(0);
 		break;
   case KEY_DOWN: //go down
     //check if a move is possible (wall, end of maze)
-    if (P.row + 1 < N && maze[P.row][P.column][0] == 0) {
-      P.row += 1;
+    if (P->row + 1 < N && maze[P->row][P->column][0] == 0) {
+      P->row += 1;
     }
   	break;
   case KEY_LEFT: //go left
     //check if a move is possible (wall, end of maze)
-    if (P.column - 1 >= 0 && maze[P.row][P.column][1] == 0) {
-      P.column -= 1;
+    if (P->column - 1 >= 0 && maze[P->row][P->column][1] == 0) {
+      P->column -= 1;
     }
   	break;
 	case KEY_UP: //go up
     //check if a move is possible (wall, end of maze)
-    if (P.row - 1 >= 0 && maze[P.row][P.column][2] == 0) {
-      P.row -= 1;
+    if (P->row - 1 >= 0 && maze[P->row][P->column][2] == 0) {
+      P->row -= 1;
     }
 		break;
 	case KEY_RIGHT: //go right
     //check if a move is possible (wall, end of maze)
-    if (P.column + 1 < M && maze[P.row][P.column][3] == 0) {
-      P.column += 1;
+    if (P->column + 1 < M && maze[P->row][P->column][3] == 0) {
+      P->column += 1;
     }
 		break;
 	}

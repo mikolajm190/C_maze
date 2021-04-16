@@ -5,6 +5,8 @@
 #include <ncurses.h>
 
 //player movement
-void PMove(int[][M][W], Pawn);
+void PMove(int[][M][W], Pawn*);
+
+//game ending function
 
 #endif
