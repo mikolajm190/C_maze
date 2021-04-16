@@ -5,13 +5,13 @@ void chtostr(char ch, char* str){
   str[1] = '\0';
 }
 
-void displayPawn(Pawn P){
+void displayPawn(Pawn *P){
 
   char pawnSign[2];
-  chtostr(P.pawnChar, pawnSign);
+  chtostr(P->pawnChar, pawnSign);
 
   //converting coordinates for proper display
-  int disRow = 2 * P.row + 1, disCol = 2 * P.column + 1;
+  int disRow = 2 * P->row + 1, disCol = 2 * P->column + 1;
 
   mvprintw(disRow, disCol, pawnSign);
 }

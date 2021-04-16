@@ -7,7 +7,10 @@
 void chtostr(char, char*);
 
 //display pawn function
-void displayPawn(Pawn P);
+void displayPawn(Pawn*);
+
+//display pawns for battle mode
+void displayPawns(Pawn*, Pawn*);
 
 //maze drawing function
 void displayMaze(int maze[][M][W]);
