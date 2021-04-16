@@ -115,7 +115,7 @@ void buildMaze(int maze[][M][W], Path *startEnd){
   int visited[N][M] = {{0}};
 
   //random entrance and exit (row is radomized column is predefined)
-  int entranceRow = rand()%10, exitRow = rand()%10;
+  int entranceRow = rand()%N, exitRow = rand()%N;
 
   //creating entrance and exit
   maze[entranceRow][0][1] = 0; maze[exitRow][M - 1][3] = 0;
@@ -124,5 +124,5 @@ void buildMaze(int maze[][M][W], Path *startEnd){
 
   /* depth first search algorithm */
   dfs(maze, visited, entranceRow, 0);
-  
+
 }

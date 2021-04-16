@@ -34,7 +34,7 @@ int main(int argc, char** argv){
     printf("Wrong number of arguments passed. 1 is needed.\n");
     exit(EXIT_FAILURE);
   }
-  else if (strcmp(argv[1], "player") != 0 && strcmp(argv[1], "ai") == 0 && strcmp(argv[1], "battle") == 0){
+  else if (strcmp(argv[1], "player") != 0 && strcmp(argv[1], "ai") != 0 && strcmp(argv[1], "battle") != 0){
     printf("Wrong argument given. Should be player/ai/battle.\n");
     exit(EXIT_FAILURE);
   }
