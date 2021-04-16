@@ -7,7 +7,7 @@
 void chtostr(char, char*);
 
 //display pawn function
-void displayPawn(Pawn*);
+void displayPawn(Pawn*, char);
 
 //display pawns for battle mode
 void displayPawns(Pawn*, Pawn*);

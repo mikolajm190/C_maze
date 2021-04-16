@@ -5,15 +5,26 @@ void chtostr(char ch, char* str){
   str[1] = '\0';
 }
 
-void displayPawn(Pawn *P){
+void displayPawn(Pawn *P, char pawnChar){
 
   char pawnSign[2];
-  chtostr(P->pawnChar, pawnSign);
+  chtostr(pawnChar, pawnSign);
 
   //converting coordinates for proper display
   int disRow = 2 * P->row + 1, disCol = 2 * P->column + 1;
 
   mvprintw(disRow, disCol, pawnSign);
+}
+
+void displayPawns(Pawn *P1, Pawn *P2){
+  if (P1->row == P2->row && P1->column == P2->column){
+    char pawnsChar = '3';
+    displayPawn(P1, pawnsChar);
+  }
+  else{
+    displayPawn(P1, P1->pawnChar);
+    displayPawn(P2, P2->pawnChar);
+  }
 }
 
 void displayMaze(int maze[][M][W]){
