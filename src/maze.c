@@ -88,7 +88,17 @@ int main(int argc, char** argv){
     displayPawn(&P2, P2.pawnChar);
     refresh();
 
-    getchar();
+    //find path
+    int correctPath[N][M];
+    solveMaze(maze, &startEnd, correctPath);
+
+    while (!isWinner(&startEnd, &P2)) {
+      usleep(2000);
+      AImove(correctPath, &P2);
+      displayMaze(maze);
+      displayPawn(&P2, P2.pawnChar);
+      refresh();
+    }
     endwin();
   }
   //battle mode
@@ -100,7 +110,19 @@ int main(int argc, char** argv){
     displayPawns(&P1, &P2);
     refresh();
 
-    getchar();
+    //find path
+    int correctPath[N][M];
+    solveMaze(maze, &startEnd, correctPath);
+
+    while (!isWinner(&startEnd, &P1) || !isWinner(&startEnd, &P2)) {
+      usleep(2000);
+      PMove(maze, &P1);
+      AImove(correctPath, &P2);
+      displayMaze(maze);
+      displayPawns(&P1, &P2);
+      refresh();
+    }
+
     endwin();
   }
 

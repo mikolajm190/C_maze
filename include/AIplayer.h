@@ -3,19 +3,16 @@
 
 #include "macros.h"
 
+//calculate manhattan distance
+int manhattanDistance(int, int, int, int);;
+
 //pathfinding algorithm
-void findShortestPath(int[][M][W]);
+int findPath(int[][M][W], Path*, int, int, int[][M], int[][M], int[][M]);
 
-//
-void manhattanDistance(int[][M], int, int, int, int);;
-
-//
-void distanceFromEntrance(int[][M], int, int);
-
-//function that assign values to cells neighbours (heuristic based movement)
-void assignNeighbours(int[][M][W], int, int, int[][M], int[][M]);
+//solve maze (recursive + heuristcs)
+void solveMaze(int[][M][W], Path*, int[][M]);
 
 //AI movement
-void AImove(int[][M][W], Path*);
+void AImove(int[][M], Pawn*);
 
 #endif

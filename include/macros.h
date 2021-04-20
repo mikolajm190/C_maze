@@ -4,7 +4,7 @@
 #include <stdlib.h> //abs, exit, srand, rand
 #include <ncurses.h> //api
 
-//dimensions
+//dimensions N-rows, M-columns
 #define N 10
 #define M 20
 //walls and visit digit
