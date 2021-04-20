@@ -4,10 +4,11 @@ UKSW, PPI
 topic: maze
 */
 
+/* argument validation */
 #include <string.h> //strcmp
 
 /* delay */
-#include <unistd.h>
+#include <unistd.h> //usleep
 
 /* maze generation functions */
 #include "mazeGeneration.h"
@@ -82,10 +83,25 @@ int main(int argc, char** argv){
   //ai player mode
   else if (strcmp(argv[1], "ai") == 0) {
     Pawn P2; P2.row = 0; P2.column = 0; P2.pawnChar = '2';
+
+    displayMaze(maze);
+    displayPawn(&P2, P2.pawnChar);
+    refresh();
+
+    getchar();
+    endwin();
   }
   //battle mode
   else {
-    //test
+    Pawn P1; P1.row = 0; P1.column = 0; P1.pawnChar = '1';
+    Pawn P2; P2.row = 0; P2.column = 0; P2.pawnChar = '2';
+
+    displayMaze(maze);
+    displayPawns(&P1, &P2);
+    refresh();
+
+    getchar();
+    endwin();
   }
 
   return EXIT_SUCCESS;
