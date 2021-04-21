@@ -9,11 +9,32 @@ creation date: 22.03.2021
 This file consists of 3 sections:
 
 1. User's guide
+	a. game modes
+	b. launching a game
+	c. gameplay
+
 2. Project documentation
     a. maze generation
     b. pathfinding
+
 3. Bibliography
 
+
+//////		 USER'S GUIDE 				 ///////
+
+a. GAME MODES
+
+This is a game for one player. Your job is to solve the maze.
+
+You have 3 play modes available: player, ai, battle. First lets you solve a maze by yourself. Second gives you opportunity to watch ai player solve a maze. Last is designed to test your skills in a race against ai player.
+
+b. STARTING A GAME
+
+Each gamemode is chosen by passing argument in terminal. It looks like this: './mazemake.game game_mode_phrase'. Insert one of the following instead of a 'game_mode_phrase': 'player', 'ai', 'battle'. Each of these is corresponding to game play mode in following order: player mode, ai mode, battle mode.
+
+c. GAMEPLAY
+
+During the game you move by pressing arrow keys. If you cant find a solution, leave a game by pressing 'q' key. Entrance is on the left side of the board and exit on the right. These are the cells that make a gap in the outer walls of the maze.
 
 //////       PROJECT DOCUMENTATION       ///////
 
@@ -26,9 +47,11 @@ Recursive division method: description(todo)
 
 At this time I realized that compiling so many files was starting to become tiring. I did some research and found helpful article about make command. After small adjustments I was able to compile with great ease.
 
-The result of buliding a maze was satisfying enough to proceed to second part of the project. My second goal was to implement algorithm for AI. After gaining some knowledge in this topic...(todo)
+The result of buliding a maze was satisfying enough to proceed to second part of the project. My second goal was to implement algorithm for AI. After gaining some knowledge in this topic I picked the recursive backtracker method. 
 
-Before proceeding to the second part I realized that keeping a integer for marking cells visited is unnecessary. Hence I decided to rebuild my mazeGeneration function instead of keeping this information in maze array I created a local array in this function.
+Before proceeding to the second part I realized that keeping an integer for marking cells visited is unnecessary. Hence I decided to rebuild my mazeGeneration function instead of keeping this information in maze array I created a local array in this function.
+
+After small adjustments of a "menu" I finished work on my project.
 
 //////           BIBLIOGRAPHY            ///////
 
