@@ -63,7 +63,7 @@ int main(int argc, char** argv){
 
   //player mode
   if (strcmp(argv[1], "player") == 0) {
-    Pawn P1; P1.row = 0; P1.column = 0; P1.pawnChar = '1';
+    Pawn P1; P1.row = startEnd.rowStart; P1.column = startEnd.colStart; P1.pawnChar = '1';
 
     //initialization of a pawn based on values returned by buildMaze() (entranceRow and exitRow)
     displayMaze(maze);
@@ -82,7 +82,7 @@ int main(int argc, char** argv){
   }
   //ai player mode
   else if (strcmp(argv[1], "ai") == 0) {
-    Pawn P2; P2.row = 0; P2.column = 0; P2.pawnChar = '2';
+    Pawn P2; P2.row = startEnd.rowStart; P2.column = startEnd.colStart; P2.pawnChar = '2';
 
     displayMaze(maze);
     displayPawn(&P2, P2.pawnChar);
@@ -93,7 +93,7 @@ int main(int argc, char** argv){
     solveMaze(maze, &startEnd, correctPath);
 
     while (!isWinner(&startEnd, &P2)) {
-      usleep(2000);
+      usleep(1000000);
       AImove(correctPath, &P2);
       displayMaze(maze);
       displayPawn(&P2, P2.pawnChar);
@@ -103,8 +103,8 @@ int main(int argc, char** argv){
   }
   //battle mode
   else {
-    Pawn P1; P1.row = 0; P1.column = 0; P1.pawnChar = '1';
-    Pawn P2; P2.row = 0; P2.column = 0; P2.pawnChar = '2';
+    Pawn P1; P1.row = startEnd.rowStart; P1.column = startEnd.colStart; P1.pawnChar = '1';
+    Pawn P2; P2.row = startEnd.rowStart; P2.column = startEnd.colStart; P2.pawnChar = '2';
 
     displayMaze(maze);
     displayPawns(&P1, &P2);
@@ -115,14 +115,13 @@ int main(int argc, char** argv){
     solveMaze(maze, &startEnd, correctPath);
 
     while (!isWinner(&startEnd, &P1) || !isWinner(&startEnd, &P2)) {
-      usleep(2000);
+      //if player doesnt move in 2 seconds move ai
       PMove(maze, &P1);
       AImove(correctPath, &P2);
       displayMaze(maze);
       displayPawns(&P1, &P2);
       refresh();
     }
-
     endwin();
   }
 
