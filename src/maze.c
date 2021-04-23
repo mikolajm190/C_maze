@@ -71,6 +71,7 @@ int main(int argc, char** argv){
     displayPawn(&P1, P1.pawnChar);
     refresh();
 
+    //let player move until he wins
     while (!isWinner(&startEnd, &P1)) {
       usleep((unsigned int) (50000));
       PMove(maze, &P1);
@@ -92,27 +93,14 @@ int main(int argc, char** argv){
     displayPawn(&P2, P2.pawnChar);
     refresh();
 
-    //find path
+    //find path and store it in array
     int correctPath[N][M] = {{0}}, visited[N][M] = {{0}};
-
-    //initialize arrays
-    for (int i = 0; i < N; i++){
-      for (int j = 0; j < M; j++){
-        correctPath[i][j] = 0; visited[i][j] = 0;
-      }
-    }
-
     solveMaze(maze, visited, correctPath, &startEnd);
 
-    //clear visited array
-    for (int i = 0; i < N; i++){
-      for (int j = 0; j < M; j++){
-        visited[i][j] = 0;
-      }
-    }
-
+    //for user to enable exit during ai playthrough
     int key = -1;
 
+    //let ai move until it reaches exit
     while (!isWinner(&startEnd, &P2)) {
       usleep(500000);
       AImove(correctPath, visited, &P2);
@@ -145,8 +133,9 @@ int main(int argc, char** argv){
     int correctPath[N][M] = {{0}}, visited[N][M] = {{0}};
     solveMaze(maze, correctPath, visited, &startEnd);
 
-    while (!isWinner(&startEnd, &P1) || !isWinner(&startEnd, &P2)) {
-      //if player doesnt move in 2 seconds move ai
+    //let player and ai move until one of them reaches exit
+    while (!isWinner(&startEnd, &P1) && !isWinner(&startEnd, &P2)) {
+      usleep(500000);
       PMove(maze, &P1);
       AImove(correctPath, visited, &P2);
 
