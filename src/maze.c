@@ -63,9 +63,10 @@ int main(int argc, char** argv){
 
   //player mode
   if (strcmp(argv[1], "player") == 0) {
+    //initialization of a pawn based on values returned by buildMaze() (entranceRow and exitRow)
     Pawn P1; P1.row = startEnd.rowStart; P1.column = startEnd.colStart; P1.pawnChar = '1';
 
-    //initialization of a pawn based on values returned by buildMaze() (entranceRow and exitRow)
+    //first display
     displayMaze(maze);
     displayPawn(&P1, P1.pawnChar);
     refresh();
@@ -73,6 +74,8 @@ int main(int argc, char** argv){
     while (!isWinner(&startEnd, &P1)) {
       usleep((unsigned int) (50000));
       PMove(maze, &P1);
+
+      //display changes
       displayMaze(maze);
       displayPawn(&P1, P1.pawnChar);
       refresh();
@@ -84,20 +87,47 @@ int main(int argc, char** argv){
   else if (strcmp(argv[1], "ai") == 0) {
     Pawn P2; P2.row = startEnd.rowStart; P2.column = startEnd.colStart; P2.pawnChar = '2';
 
+    //first display
     displayMaze(maze);
     displayPawn(&P2, P2.pawnChar);
     refresh();
 
     //find path
-    int correctPath[N][M];
-    solveMaze(maze, &startEnd, correctPath);
+    int correctPath[N][M] = {{0}}, visited[N][M] = {{0}};
+
+    //initialize arrays
+    for (int i = 0; i < N; i++){
+      for (int j = 0; j < M; j++){
+        correctPath[i][j] = 0; visited[i][j] = 0;
+      }
+    }
+
+    solveMaze(maze, visited, correctPath, &startEnd);
+
+    //clear visited array
+    for (int i = 0; i < N; i++){
+      for (int j = 0; j < M; j++){
+        visited[i][j] = 0;
+      }
+    }
+
+    int key = -1;
 
     while (!isWinner(&startEnd, &P2)) {
-      usleep(1000000);
-      AImove(correctPath, &P2);
+      usleep(500000);
+      AImove(correctPath, visited, &P2);
+
+      //display changes
       displayMaze(maze);
       displayPawn(&P2, P2.pawnChar);
       refresh();
+
+      //if player wish to exit
+      key = getch();
+      if (key == 'q'){
+        endwin();
+        exit(EXIT_SUCCESS);
+      }
     }
     endwin();
   }
@@ -106,18 +136,21 @@ int main(int argc, char** argv){
     Pawn P1; P1.row = startEnd.rowStart; P1.column = startEnd.colStart; P1.pawnChar = '1';
     Pawn P2; P2.row = startEnd.rowStart; P2.column = startEnd.colStart; P2.pawnChar = '2';
 
+    //first display
     displayMaze(maze);
     displayPawns(&P1, &P2);
     refresh();
 
     //find path
-    int correctPath[N][M];
-    solveMaze(maze, &startEnd, correctPath);
+    int correctPath[N][M] = {{0}}, visited[N][M] = {{0}};
+    solveMaze(maze, correctPath, visited, &startEnd);
 
     while (!isWinner(&startEnd, &P1) || !isWinner(&startEnd, &P2)) {
       //if player doesnt move in 2 seconds move ai
       PMove(maze, &P1);
-      AImove(correctPath, &P2);
+      AImove(correctPath, visited, &P2);
+
+      //display changes
       displayMaze(maze);
       displayPawns(&P1, &P2);
       refresh();

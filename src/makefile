@@ -6,10 +6,10 @@ ODIR=obj
 
 LIBS=-lncurses
 
-_DEPS=displayAndInput.h mazeGeneration.h macros.h player.h AIplayer.h
+_DEPS=displayAndInput.h mazeGeneration.h macros.h player.h AIplayer.h mazeUtils.h
 DEPS=$(patsubst %,$(IDIR)/%,$(_DEPS))
 
-_OBJ=displayAndInput.o mazeGeneration.o maze.o player.o AIplayer.o
+_OBJ=displayAndInput.o mazeGeneration.o maze.o player.o AIplayer.o mazeUtils.o
 OBJ=$(patsubst %,$(ODIR)/%,$(_OBJ))
 
 $(ODIR)/%.o: %.c $(DEPS)

@@ -3,16 +3,13 @@
 
 #include "macros.h"
 
-//calculate manhattan distance
-int manhattanDistance(int, int, int, int);;
-
 //pathfinding algorithm
 int findPath(int[][M][W], Path*, int, int, int[][M], int[][M]);
 
-//solve maze (recursive + heuristcs)
-void solveMaze(int[][M][W], Path*, int[][M]);
+//solve maze (recursive backtracker)
+void solveMaze(int[][M][W], int[][M], int[][M], Path*);
 
 //AI movement
-void AImove(int[][M], Pawn*);
+void AImove(int[][M], int[][M], Pawn*);
 
 #endif

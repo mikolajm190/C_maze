@@ -48,12 +48,11 @@ void displayMaze(int maze[][M][W]){
           //converting coordinates for proper display
           int disRow = 2 * i + 1, disCol = 2 * j + 1;
 
-          //parts of the maze that arent dependent of maze
+          //parts of the maze that arent dependent on maze
           mvprintw(disRow - 1, disCol - 1, rowSign);
           mvprintw(disRow - 1, disCol + 1, rowSign);
           mvprintw(disRow + 1, disCol - 1, rowSign);
           mvprintw(disRow + 1, disCol + 1, rowSign);
-
 
           //random cell
           for(int k = 0; k < W; k++){
