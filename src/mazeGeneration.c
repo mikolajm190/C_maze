@@ -9,7 +9,7 @@ int jump(int maze[][M][W], int visited[][M], int cellRow, int cellCol){
   //try jumping down
   if (wallInt < 100000) {
     //check if down is inside the maze and if the cell is unvisited
-    if (!jumpToUnivisited(visited, cellRow + 1, cellCol))
+    if (!isUnivisited(visited, cellRow + 1, cellCol))
       return -1;
     else
       return 0;
@@ -17,21 +17,21 @@ int jump(int maze[][M][W], int visited[][M], int cellRow, int cellCol){
   //try jumping left
   else if (wallInt < 200000) {
     //check if left is inside the maze and if the cell is unvisited
-    if (!jumpToUnivisited(visited, cellRow, cellCol - 1))
+    if (!isUnivisited(visited, cellRow, cellCol - 1))
       return -1;
     else
       return 1;
   }
   else if (wallInt < 300000) {
     //check if up is inside the maze and if the cell is unvisited
-    if (!jumpToUnivisited(visited, cellRow - 1, cellCol))
+    if (!isUnivisited(visited, cellRow - 1, cellCol))
       return -1;
     else
       return 2;
   }
   else {
     //check if right is inside the maze and if the cell is unvisited
-    if (!jumpToUnivisited(visited, cellRow, cellCol + 1))
+    if (!isUnivisited(visited, cellRow, cellCol + 1))
       return -1;
     else
       return 3;

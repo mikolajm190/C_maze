@@ -19,28 +19,28 @@ int findPath(int maze[][M][W], Path *startEnd, int currRow, int currCol, int vis
   visited[currRow][currCol] = 1;
 
   //call reachable neighbours
-  if (maze[currRow][currCol][0] == 0 && jumpToUnivisited(visited, currRow + 1, currCol)){
+  if (maze[currRow][currCol][0] == 0 && isUnivisited(visited, currRow + 1, currCol)){
     if (findPath(maze, startEnd, currRow + 1, currCol, visited, correctPath)){
       //add cell to correct path
       correctPath[currRow][currCol] = 1;
       return 1;
     }
   }
-  if (maze[currRow][currCol][1] == 0 && jumpToUnivisited(visited, currRow, currCol - 1)){
+  if (maze[currRow][currCol][1] == 0 && isUnivisited(visited, currRow, currCol - 1)){
     if (findPath(maze, startEnd, currRow, currCol - 1, visited, correctPath)){
       //add cell to correct path
       correctPath[currRow][currCol] = 1;
       return 1;
     }
   }
-  if (maze[currRow][currCol][2] == 0 && jumpToUnivisited(visited, currRow - 1, currCol)){
+  if (maze[currRow][currCol][2] == 0 && isUnivisited(visited, currRow - 1, currCol)){
     if (findPath(maze, startEnd, currRow - 1, currCol, visited, correctPath)){
       //add cell to correct path
       correctPath[currRow][currCol] = 1;
       return 1;
     }
   }
-  if (maze[currRow][currCol][3] == 0 && jumpToUnivisited(visited, currRow, currCol + 1)){
+  if (maze[currRow][currCol][3] == 0 && isUnivisited(visited, currRow, currCol + 1)){
     if (findPath(maze, startEnd, currRow, currCol + 1, visited, correctPath)){
       //add cell to correct path
       correctPath[currRow][currCol] = 1;
@@ -77,16 +77,16 @@ void AImove(int correctPath[][M], int visited[][M], Pawn *P){
   visited[P->row][P->column] = 1;
 
   //look for next step and go
-  if (jumpToUnivisited(visited, P->row + 1, P->column) && correctPath[P->row + 1][P->column] == 1) {
+  if (isUnivisited(visited, P->row + 1, P->column) && correctPath[P->row + 1][P->column] == 1) {
     P->row += 1;
   }
-  else if (jumpToUnivisited(visited, P->row, P->column - 1) && correctPath[P->row][P->column - 1] == 1) {
+  else if (isUnivisited(visited, P->row, P->column - 1) && correctPath[P->row][P->column - 1] == 1) {
     P->column -= 1;
   }
-  else if (jumpToUnivisited(visited, P->row - 1, P->column) && correctPath[P->row - 1][P->column] == 1) {
+  else if (isUnivisited(visited, P->row - 1, P->column) && correctPath[P->row - 1][P->column] == 1) {
     P->row -= 1;
   }
-  else if (jumpToUnivisited(visited, P->row, P->column + 1) && correctPath[P->row][P->column + 1] == 1) {
+  else if (isUnivisited(visited, P->row, P->column + 1) && correctPath[P->row][P->column + 1] == 1) {
     P->column += 1;
   }
 

@@ -10,7 +10,7 @@ int hasUnivistedNeighbours(int visited[][M], int cellRow, int cellCol){
   }
 }
 
-int jumpToUnivisited(int visited[][M], int cellRow, int cellCol){
+int isUnivisited(int visited[][M], int cellRow, int cellCol){
   //check if cell with given cooridnates is inside the maze and has not been visited yet
   if (cellRow >= 0 && cellRow < N && cellCol >= 0 && cellCol < M && visited[cellRow][cellCol] == 0){
     return 1;
