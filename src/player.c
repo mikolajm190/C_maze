@@ -1,7 +1,7 @@
 #include "player.h"
 
 //check if a move is viable and move if true
-void PMove(int maze[][M][W], Pawn *P){
+int PMove(int maze[][M][W], Pawn *P){
   //get user input
   int key = -1;
 	key = getch();
@@ -15,28 +15,35 @@ void PMove(int maze[][M][W], Pawn *P){
     if (P->row + 1 < N && maze[P->row][P->column][0] == 0) {
       P->row += 1;
     }
+    clear();
+    return 1;
   	break;
   case KEY_LEFT: //go left
     //check if a move is possible (wall, end of maze)
     if (P->column - 1 >= 0 && maze[P->row][P->column][1] == 0) {
       P->column -= 1;
     }
+    clear();
+    return 1;
   	break;
 	case KEY_UP: //go up
     //check if a move is possible (wall, end of maze)
     if (P->row - 1 >= 0 && maze[P->row][P->column][2] == 0) {
       P->row -= 1;
     }
+    clear();
+    return 1;
 		break;
 	case KEY_RIGHT: //go right
     //check if a move is possible (wall, end of maze)
     if (P->column + 1 < M && maze[P->row][P->column][3] == 0) {
       P->column += 1;
     }
+    clear();
+    return 1;
 		break;
 	}
-  clear();
-  return;
+  return -1;
 }
 
 //check if player has reached an exit (if yes return 1, return 0 otherwise)

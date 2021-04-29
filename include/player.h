@@ -4,7 +4,7 @@
 #include "macros.h"
 
 //player movement
-void PMove(int[][M][W], Pawn*);
+int PMove(int[][M][W], Pawn*);
 
 //game ending function
 int isWinner(Path*, Pawn*);

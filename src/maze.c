@@ -102,7 +102,7 @@ int main(int argc, char** argv){
 
     //let ai move until it reaches exit
     while (!isWinner(&startEnd, &P2)) {
-      usleep(500000);
+      usleep(100000);
       AImove(maze, correctPath, visited, &P2);
 
       //display changes
@@ -135,9 +135,9 @@ int main(int argc, char** argv){
 
     //let player and ai move until one of them reaches exit
     while (!isWinner(&startEnd, &P1) && !isWinner(&startEnd, &P2)) {
-      usleep(500000);
-      PMove(maze, &P1);
-      AImove(maze, correctPath, visited, &P2);
+      usleep(1000000);
+      if (PMove(maze, &P1) == -1)
+        AImove(maze, correctPath, visited, &P2);
 
       //display changes
       displayMaze(maze);
