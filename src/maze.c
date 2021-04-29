@@ -95,7 +95,7 @@ int main(int argc, char** argv){
 
     //find path and store it in array
     int correctPath[N][M] = {{0}}, visited[N][M] = {{0}};
-    solveMaze(maze, visited, correctPath, &startEnd);
+    solveMaze(maze,correctPath, visited, &startEnd);
 
     //for user to enable exit during ai playthrough
     int key = -1;
