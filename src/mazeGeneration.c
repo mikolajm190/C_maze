@@ -60,36 +60,36 @@ void dfs(int maze[][M][W], int visited[][M], int cellRow, int cellCol){
 
     switch (wallInt) {
       //down cell
-      case 0:
+      case down:
       //removing walls
-      maze[cellRow][cellCol][0] = 0; maze[cellRow + 1][cellCol][2] = 0;
+      maze[cellRow][cellCol][down] = 0; maze[cellRow + 1][cellCol][up] = 0;
 
       //jump to next cell
       dfs(maze, visited, cellRow + 1, cellCol);
       break;
 
       //left side neighbour
-      case 1:
+      case left:
       //removing walls
-      maze[cellRow][cellCol][1] = 0; maze[cellRow][cellCol - 1][3] = 0;
+      maze[cellRow][cellCol][left] = 0; maze[cellRow][cellCol - 1][right] = 0;
 
       //jump to next cell
       dfs(maze, visited, cellRow, cellCol - 1);
       break;
 
       //up side neighbour
-      case 2:
+      case up:
       //removing walls
-      maze[cellRow][cellCol][2] = 0; maze[cellRow - 1][cellCol][0] = 0;
+      maze[cellRow][cellCol][up] = 0; maze[cellRow - 1][cellCol][down] = 0;
 
       //jump to next cell
       dfs(maze, visited, cellRow - 1, cellCol);
       break;
 
       //right side neighbour
-      case 3:
+      case right:
       //removing walls
-      maze[cellRow][cellCol][3] = 0; maze[cellRow][cellCol + 1][1] = 0;
+      maze[cellRow][cellCol][right] = 0; maze[cellRow][cellCol + 1][left] = 0;
 
       //jump to next cell
       dfs(maze, visited, cellRow, cellCol + 1);
@@ -117,7 +117,7 @@ void buildMaze(int maze[][M][W], Path *startEnd){
   int entranceRow = rand()%N, exitRow = rand()%N;
 
   //creating entrance and exit
-  maze[entranceRow][0][1] = 0; maze[exitRow][M - 1][3] = 0;
+  maze[entranceRow][0][left] = 0; maze[exitRow][M - 1][right] = 0;
   startEnd->rowStart = entranceRow; startEnd->colStart = 0;
   startEnd->rowEnd = exitRow; startEnd->colEnd = M - 1;
 

@@ -7,8 +7,11 @@
 //dimensions N-rows, M-columns
 #define N 10
 #define M 20
-//walls and visit digit
+//walls
 #define W 4
+
+//enum for walls
+enum {down, left, up, right, limit} Wall;
 
 //struct representing a player pawn
 typedef struct pawn {

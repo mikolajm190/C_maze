@@ -12,7 +12,7 @@ int PMove(int maze[][M][W], Pawn *P){
 		break;
   case KEY_DOWN: //go down
     //check if a move is possible (wall, end of maze)
-    if (P->row + 1 < N && maze[P->row][P->column][0] == 0) {
+    if (P->row + 1 < N && maze[P->row][P->column][down] == 0) {
       P->row += 1;
     }
     clear();
@@ -20,7 +20,7 @@ int PMove(int maze[][M][W], Pawn *P){
   	break;
   case KEY_LEFT: //go left
     //check if a move is possible (wall, end of maze)
-    if (P->column - 1 >= 0 && maze[P->row][P->column][1] == 0) {
+    if (P->column - 1 >= 0 && maze[P->row][P->column][left] == 0) {
       P->column -= 1;
     }
     clear();
@@ -28,7 +28,7 @@ int PMove(int maze[][M][W], Pawn *P){
   	break;
 	case KEY_UP: //go up
     //check if a move is possible (wall, end of maze)
-    if (P->row - 1 >= 0 && maze[P->row][P->column][2] == 0) {
+    if (P->row - 1 >= 0 && maze[P->row][P->column][up] == 0) {
       P->row -= 1;
     }
     clear();
@@ -36,7 +36,7 @@ int PMove(int maze[][M][W], Pawn *P){
 		break;
 	case KEY_RIGHT: //go right
     //check if a move is possible (wall, end of maze)
-    if (P->column + 1 < M && maze[P->row][P->column][3] == 0) {
+    if (P->column + 1 < M && maze[P->row][P->column][right] == 0) {
       P->column += 1;
     }
     clear();

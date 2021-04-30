@@ -17,22 +17,22 @@ int findPath(int maze[][M][W], Path *startEnd, int currRow, int currCol, int vis
   correctPath[currRow][currCol] = 1;
 
   //try going in one of 4 directions if there's legal path and cell is unvisited
-  if (maze[currRow][currCol][0] == 0 && isUnivisited(visited, currRow + 1, currCol)){
+  if (maze[currRow][currCol][down] == 0 && isUnivisited(visited, currRow + 1, currCol)){
     if (findPath(maze, startEnd, currRow + 1, currCol, visited, correctPath)){
       return 1;
     }
   }
-  if (maze[currRow][currCol][1] == 0 && isUnivisited(visited, currRow, currCol - 1)){
+  if (maze[currRow][currCol][left] == 0 && isUnivisited(visited, currRow, currCol - 1)){
     if (findPath(maze, startEnd, currRow, currCol - 1, visited, correctPath)){
       return 1;
     }
   }
-  if (maze[currRow][currCol][2] == 0 && isUnivisited(visited, currRow - 1, currCol)){
+  if (maze[currRow][currCol][up] == 0 && isUnivisited(visited, currRow - 1, currCol)){
     if (findPath(maze, startEnd, currRow - 1, currCol, visited, correctPath)){
       return 1;
     }
   }
-  if (maze[currRow][currCol][3] == 0 && isUnivisited(visited, currRow, currCol + 1)){
+  if (maze[currRow][currCol][right] == 0 && isUnivisited(visited, currRow, currCol + 1)){
     if (findPath(maze, startEnd, currRow, currCol + 1, visited, correctPath)){
       return 1;
     }

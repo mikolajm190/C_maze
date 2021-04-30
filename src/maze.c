@@ -23,7 +23,12 @@ topic: maze
 #include "displayAndInput.h"
 
 //change the seed if you want to generate different maze
-#define SEED 100
+#define SEED 1001
+
+//driver functions for each play mode
+void playerMode(int [][M][W], Path*);
+void aiMode(int [][M][W], Path*);
+void battleMode(int [][M][W], Path*);
 
 int main(int argc, char** argv){
 
@@ -63,89 +68,104 @@ int main(int argc, char** argv){
 
   //player mode
   if (strcmp(argv[1], "player") == 0) {
-    //initialization of a pawn based on values returned by buildMaze() (entranceRow and exitRow)
-    Pawn P1; P1.row = startEnd.rowStart; P1.column = startEnd.colStart; P1.pawnChar = '1';
-
-    //first display
-    displayMaze(maze);
-    displayPawn(&P1, P1.pawnChar);
-    refresh();
-
-    //let player move until he wins
-    while (!isWinner(&startEnd, &P1)) {
-      usleep((unsigned int) (50000));
-      PMove(maze, &P1);
-
-      //display changes
-      displayMaze(maze);
-      displayPawn(&P1, P1.pawnChar);
-      refresh();
-    }
-
-    endwin();
+    playerMode(maze, &startEnd);
   }
   //ai player mode
   else if (strcmp(argv[1], "ai") == 0) {
-    Pawn P2; P2.row = startEnd.rowStart; P2.column = startEnd.colStart; P2.pawnChar = '2';
+    aiMode(maze, &startEnd);
+  }
+  //battle mode
+  else {
+    battleMode(maze, &startEnd);
+  }
 
-    //first display
+  return EXIT_SUCCESS;
+}
+
+
+void playerMode(int maze[][M][W], Path* startEnd){
+  //initialization of a pawn based on values returned by buildMaze() (entranceRow and exitRow)
+  Pawn P1; P1.row = startEnd->rowStart; P1.column = startEnd->colStart; P1.pawnChar = '1';
+
+  //first display
+  displayMaze(maze);
+  displayPawn(&P1, P1.pawnChar);
+  refresh();
+
+  //let player move until he wins
+  while (!isWinner(startEnd, &P1)) {
+    usleep((unsigned int) (50000));
+    PMove(maze, &P1);
+
+    //display changes
+    displayMaze(maze);
+    displayPawn(&P1, P1.pawnChar);
+    refresh();
+  }
+  endwin();
+  printf("Well done, you have won.\n");
+}
+
+void aiMode(int maze[][M][W], Path* startEnd){
+  Pawn P2; P2.row = startEnd->rowStart; P2.column = startEnd->colStart; P2.pawnChar = '2';
+
+  //first display
+  displayMaze(maze);
+  displayPawn(&P2, P2.pawnChar);
+  refresh();
+
+  //find path and store it in array
+  int correctPath[N][M] = {{0}}, visited[N][M] = {{0}};
+  solveMaze(maze,correctPath, visited, startEnd);
+
+  //for user to enable exit during ai playthrough
+  int key = -1;
+
+  //let ai move until it reaches exit
+  while (!isWinner(startEnd, &P2)) {
+    usleep(300000);
+    AImove(maze, correctPath, visited, &P2);
+
+    //display changes
     displayMaze(maze);
     displayPawn(&P2, P2.pawnChar);
     refresh();
 
-    //find path and store it in array
-    int correctPath[N][M] = {{0}}, visited[N][M] = {{0}};
-    solveMaze(maze,correctPath, visited, &startEnd);
+    //if player wish to exit
+    key = getch();
+    if (key == 'q'){
+      endwin();
+      printf("Program ended by user.\n");
+      exit(EXIT_SUCCESS);
+    }
+  }
+  endwin();
+  printf("AI has won the game.\n");
+}
 
-    //for user to enable exit during ai playthrough
-    int key = -1;
+void battleMode(int maze[][M][W], Path* startEnd){
+  Pawn P1; P1.row = startEnd->rowStart; P1.column = startEnd->colStart; P1.pawnChar = '1';
+  Pawn P2; P2.row = startEnd->rowStart; P2.column = startEnd->colStart; P2.pawnChar = '2';
 
-    //let ai move until it reaches exit
-    while (!isWinner(&startEnd, &P2)) {
-      usleep(300000);
+  //first display
+  displayMaze(maze);
+  displayPawns(&P1, &P2);
+  refresh();
+
+  //find path
+  int correctPath[N][M] = {{0}}, visited[N][M] = {{0}};
+  solveMaze(maze, correctPath, visited, startEnd);
+
+  //let player and ai move until one of them reaches exit
+  while (!isWinner(startEnd, &P1) && !isWinner(startEnd, &P2)) {
+    usleep(250000);
+    if (PMove(maze, &P1) == -1)
       AImove(maze, correctPath, visited, &P2);
 
-      //display changes
-      displayMaze(maze);
-      displayPawn(&P2, P2.pawnChar);
-      refresh();
-
-      //if player wish to exit
-      key = getch();
-      if (key == 'q'){
-        endwin();
-        exit(EXIT_SUCCESS);
-      }
-    }
-    endwin();
-  }
-  //battle mode
-  else {
-    Pawn P1; P1.row = startEnd.rowStart; P1.column = startEnd.colStart; P1.pawnChar = '1';
-    Pawn P2; P2.row = startEnd.rowStart; P2.column = startEnd.colStart; P2.pawnChar = '2';
-
-    //first display
+    //display changes
     displayMaze(maze);
     displayPawns(&P1, &P2);
     refresh();
-
-    //find path
-    int correctPath[N][M] = {{0}}, visited[N][M] = {{0}};
-    solveMaze(maze, correctPath, visited, &startEnd);
-
-    //let player and ai move until one of them reaches exit
-    while (!isWinner(&startEnd, &P1) && !isWinner(&startEnd, &P2)) {
-      usleep(250000);
-      if (PMove(maze, &P1) == -1)
-        AImove(maze, correctPath, visited, &P2);
-
-      //display changes
-      displayMaze(maze);
-      displayPawns(&P1, &P2);
-      refresh();
-    }
-    endwin();
   }
-
-  return EXIT_SUCCESS;
+  endwin();
 }
