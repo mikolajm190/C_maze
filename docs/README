@@ -30,7 +30,7 @@ You have 3 play modes available: player, ai, battle. First lets you solve a maze
 
 b. STARTING A GAME
 
-Each gamemode is chosen by passing argument in terminal. It looks like this: './mazemake.game game_mode_phrase'. Insert one of the following instead of a 'game_mode_phrase': 'player', 'ai', 'battle'. Each of these is corresponding to game play mode in following order: player mode, ai mode, battle mode.
+Each gamemode is chosen by passing argument in terminal. It looks like this: './maze.game game_mode_phrase'. Insert one of the following instead of a 'game_mode_phrase': 'player', 'ai', 'battle'. Each of these is corresponding to game play mode in following order: player mode, ai mode, battle mode.
 
 c. GAMEPLAY
 
@@ -38,23 +38,31 @@ During the game you move by pressing arrow keys. If you cant find a solution, le
 
 //////       PROJECT DOCUMENTATION       ///////
 
+a. MAZE GENERATION
 
-My goal was finding algorithm that generate perfect maze (only one way out) and is fairly simple. I took into account also speed and recommendation within materials that I listed in 3 section of this file. Based upon those factors I decided to bring 3 final candidates: randomized depth-first search, randomized Kruskal's algorithm and recursive division method. Out of this 3 I picked first as I found it easiest to implement and read some approving recomendations. At first I decided to try recursive version even after reading about its drawback (large depth of recursion).
+My goal was finding algorithm that generate perfect maze (only one way out) and is fairly simple. I took into account also speed and recommendation within materials that I listed in 3rd section of this file. Based upon those factors I decided to bring 3 final candidates: randomized depth-first search, randomized Kruskal's algorithm and recursive division method. Out of this 3 I picked first as I found it easiest to implement and read some approving recommendations. At first I decided to try recursive version even after reading about its drawback (large depth of recursion).
 
-Randomized depth-first search: description(todo)
-Randomized Kruskal's: description(todo)
-Recursive division method: description(todo)
+Randomized depth-first search: this is an algorithm that traverses a graph in such way that it goes at first as deep as it possibly can (unlike breadth-first search which goes as wide as it can). Randomized version instead of picking for instance always left neighbour picks next cell based on a random number. If a cell has unvisited neighbours it picks one at random and remove walls between these 2 cells. It repeats until all are visited. Entrance and exit can be chosen at random because this algorithm ensures that to all cells in a maze there is a way.
+
+Randomized Kruskal's: finds a minimum spanning tree (if the graph is connected which in case of this game is true, spanning tree is a subset of the edges that includes all vertexes without cycles, weight of the edges is not relevant in this case). It creates a list of edges and set for each cell. It picks a random wall and if cells that are connected to this wall belong to different sets it removes a wall and joins 2 sets. It continues until there are walls in the list.
+
+Recursive division method: the only method that is not based on graph theory. It recursively divides maze by for instance 2 walls and creates gaps in it until all chambers meet requirements (based on length and width of a chamber)
 
 At this time I realized that compiling so many files was starting to become tiring. I did some research and found helpful article about make command. After small adjustments I was able to compile with great ease.
 
-The result of buliding a maze was satisfying enough to proceed to second part of the project. My second goal was to implement algorithm for AI. After gaining some knowledge in this topic I picked the recursive backtracker method. 
+The result of building a maze was satisfying enough to proceed to second part of the project. My second goal was to implement algorithm for AI. After gaining some knowledge in this topic I picked the recursive backtracker method which	is basically the same method that I applied for generating a maze.
 
-Before proceeding to the second part I realized that keeping an integer for marking cells visited is unnecessary. Hence I decided to rebuild my mazeGeneration function instead of keeping this information in maze array I created a local array in this function.
+b. PATHFINDING
 
-After small adjustments of a "menu" I finished work on my project.
+Algorithm that I used for pathfinding is similar to the way maze is generated. Now algorithm goes as long as it is not stuck or until it reaches exit and marks its steps by assigning value to the visited cells. If it is stuck it goes back until it can explore different way and during that process it removes mark from cells.
+
+During the selection process I found out that algorithms like A* or Dijkstra would be good solutions. Dijkstra is an algorithm that starts from initial node of the graph and then calculates distance through current cell to its neighbours. If the value inside node is greater than calculated it is overwritten by that distance. This algorithm produces a shortest-path tree. A* is an algorithm that uses heuristics to optimize its search and in contrary to Dijkstra's algorithm it produces shortest-path. It keeps all possible paths in memory and then chooses most satisfactory solution.
+
+After small adjustments of a "menu" I have finished work on my project.
 
 //////           BIBLIOGRAPHY            ///////
 
 https://en.wikipedia.org/wiki/Maze_generation_algorithm
 https://stackoverflow.com/questions/38502/whats-a-good-algorithm-to-generate-a-maze
 https://cs.colby.edu/maxwell/courses/tutorials/maketutor/
+https://en.wikipedia.org/wiki/Maze-solving_algorithm#Recursive_algorithm
