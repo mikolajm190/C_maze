@@ -23,7 +23,7 @@ topic: maze
 #include "displayAndInput.h"
 
 //change the seed if you want to generate different maze
-#define SEED 1001
+#define SEED 1000
 
 //driver functions for each play mode
 void playerMode(int [][M][W], Path*);
@@ -102,8 +102,12 @@ void playerMode(int maze[][M][W], Path* startEnd){
     displayPawn(&P1, P1.pawnChar);
     refresh();
   }
+  usleep(1000000);
+  clear();
+  mvprintw(0, 0, "Player has won the game!");
+  refresh();
+  usleep(2000000);
   endwin();
-  printf("Well done, you have won.\n");
 }
 
 void aiMode(int maze[][M][W], Path* startEnd){
@@ -139,8 +143,12 @@ void aiMode(int maze[][M][W], Path* startEnd){
       exit(EXIT_SUCCESS);
     }
   }
+  usleep(1000000);
+  clear();
+  mvprintw(0, 0, "AI has won the game!");
+  refresh();
+  usleep(2000000);
   endwin();
-  printf("AI has won the game.\n");
 }
 
 void battleMode(int maze[][M][W], Path* startEnd){
@@ -157,7 +165,24 @@ void battleMode(int maze[][M][W], Path* startEnd){
   solveMaze(maze, correctPath, visited, startEnd);
 
   //let player and ai move until one of them reaches exit
-  while (!isWinner(startEnd, &P1) && !isWinner(startEnd, &P2)) {
+  while (1) {
+    //winner check
+    if (isWinner(startEnd, &P1)){
+      usleep(1000000);
+      clear();
+      mvprintw(0, 0, "Player has won the game!");
+      refresh();
+      usleep(2000000);
+      break;
+    }
+    if (isWinner(startEnd, &P2)){
+      usleep(1000000);
+      clear();
+      mvprintw(0, 0, "AI has won the game!");
+      refresh();
+      usleep(2000000);
+      break;
+    }
     usleep(250000);
     if (PMove(maze, &P1) == -1)
       AImove(maze, correctPath, visited, &P2);
