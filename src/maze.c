@@ -30,6 +30,9 @@ void playerMode(int [][M][W], Path*);
 void aiMode(int [][M][W], Path*);
 void battleMode(int [][M][W], Path*);
 
+//winner prompt function
+void prompt(char *message);
+
 int main(int argc, char** argv){
 
   //passed arguments check
@@ -82,6 +85,13 @@ int main(int argc, char** argv){
   return EXIT_SUCCESS;
 }
 
+void prompt(char *message){
+  usleep(1000000);
+  clear();
+  mvprintw(0, 0, message);
+  refresh();
+  usleep(2000000);
+}
 
 void playerMode(int maze[][M][W], Path* startEnd){
   //initialization of a pawn based on values returned by buildMaze() (entranceRow and exitRow)
@@ -102,11 +112,7 @@ void playerMode(int maze[][M][W], Path* startEnd){
     displayPawn(&P1, P1.pawnChar);
     refresh();
   }
-  usleep(1000000);
-  clear();
-  mvprintw(0, 0, "Player has won the game!");
-  refresh();
-  usleep(2000000);
+  prompt("You have solved the maze. Congrats!");
   endwin();
 }
 
@@ -138,16 +144,12 @@ void aiMode(int maze[][M][W], Path* startEnd){
     //if player wish to exit
     key = getch();
     if (key == 'q'){
+      prompt("Game ended by user...closing the program.");
       endwin();
-      printf("Program ended by user.\n");
       exit(EXIT_SUCCESS);
     }
   }
-  usleep(1000000);
-  clear();
-  mvprintw(0, 0, "AI has won the game!");
-  refresh();
-  usleep(2000000);
+  prompt("AI solved the maze with great ease.");
   endwin();
 }
 
@@ -168,19 +170,11 @@ void battleMode(int maze[][M][W], Path* startEnd){
   while (1) {
     //winner check
     if (isWinner(startEnd, &P1)){
-      usleep(1000000);
-      clear();
-      mvprintw(0, 0, "Player has won the game!");
-      refresh();
-      usleep(2000000);
+      prompt("You have won the game. Congrats!");
       break;
     }
     if (isWinner(startEnd, &P2)){
-      usleep(1000000);
-      clear();
-      mvprintw(0, 0, "AI has won the game!");
-      refresh();
-      usleep(2000000);
+      prompt("AI has won the game.");
       break;
     }
     usleep(250000);
