@@ -2,16 +2,15 @@
 #define macros_h
 
 #include <stdlib.h> //abs, exit, srand, rand
-#include <ncurses.h> //api
+#include <ncurses.h> //visuals
 
 //dimensions N-rows, M-columns
 #define N 10
 #define M 20
+
 //walls
 #define W 4
-
-//enum for walls
-enum {down, left, up, right, limit} Wall;
+enum {down, left, up, right} Wall;
 
 //struct representing a player pawn
 typedef struct pawn {
