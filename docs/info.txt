@@ -20,7 +20,7 @@ This file consists of 3 sections:
 3. Bibliography
 
 
-//////		 USER'S GUIDE 				 ///////
+//////		 USER'S GUIDE 		///////
 
 a. GAME MODES
 
